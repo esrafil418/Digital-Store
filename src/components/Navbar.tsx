@@ -15,7 +15,7 @@ export default function Navbar() {
         <Link href="/">
           <Image src={logo} alt="logo" className="w-20" />
         </Link>
-        <div className="relative w-full hidden lg:inline-flex lg:w-150 h-10 text-base text-primeColor border border-black items-center gap-2 justify-between px-6 rounded-md">
+        <div className="relative w-full hidden lg:inline-flex lg:min-w-150 h-10 text-base text-primeColor border border-black items-center gap-2 justify-between px-6 rounded-md">
           <input
             type="text"
             placeholder="Search your products here"
@@ -26,7 +26,7 @@ export default function Navbar() {
           {searchQuery ? (
             <IoCloseOutline
               onClick={() => setSearchQuery("")}
-              className="w-5 h-5 hover:cursor-pointer"
+              className="w-5 h-5 hover:text-red-500 hover:cursor-pointer"
             />
           ) : (
             <FaSearch className="w-5 h-5 hover:cursor-pointer" />
