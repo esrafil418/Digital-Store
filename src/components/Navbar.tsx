@@ -6,16 +6,42 @@ import logo from "@/assets/logoBlack.png";
 import { useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 import { FaSearch } from "react-icons/fa";
+import { usePathname } from "next/navigation";
+import { HiMenuAlt2 } from "react-icons/hi";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState("");
+
+  const navBarList = [
+    {
+      title: "Home",
+      link: "/",
+    },
+    {
+      title: "Shop",
+      link: "/shop",
+    },
+    {
+      title: "Cart",
+      link: "/cart",
+    },
+    {
+      title: "Profile",
+      link: "/profile",
+    },
+    {
+      title: "Studio",
+      link: "/studio",
+    },
+  ];
   return (
     <div className="w-full h-20 bg-white border-b border-be-gray-400">
       <nav className="h-full max-w-7xl mx-auto px-4 xl:px-0 flex items-center justify-between gap-2">
         <Link href="/">
           <Image src={logo} alt="logo" className="w-20" />
         </Link>
-        <div className="relative w-full hidden lg:inline-flex lg:min-w-150 h-10 text-base text-primeColor border border-black items-center gap-2 justify-between px-6 rounded-md">
+        <div className="relative w-full hidden lg:inline-flex lg:w-150 h-10 text-base text-primeColor border border-black items-center gap-2 justify-between px-6 rounded-md">
           <input
             type="text"
             placeholder="Search your products here"
@@ -32,9 +58,18 @@ export default function Navbar() {
             <FaSearch className="w-5 h-5 hover:cursor-pointer" />
           )}
         </div>
-        <div className="">
-          <p className="">nav links</p>
+        <div className="hidden md:inline-flex items-center gap-2">
+          {navBarList.map((item) => (
+            <Link
+              href={item?.link}
+              key={item?.link}
+              className={`flex hover:font-medium w-20 h-6 justify-center items-center px-12 text-gray-600 hover:underline underline-offset-4 decoration-1 hover:text-gray-950 md:border-r-2 border-r-gray-400 duration-100 last:border-r-0 ${pathname === item?.link && "text-gray-950 underline"}`}
+            >
+              {item?.title}
+            </Link>
+          ))}
         </div>
+        <HiMenuAlt2 className="inline-flex md:hidden cursor-pointer w-8 h-6" />
       </nav>
     </div>
   );
